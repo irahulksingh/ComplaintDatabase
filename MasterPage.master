@@ -1,0 +1,136 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/modern-business.css" rel="stylesheet" />
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    </head>
+<body>
+    <form runat="server">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+
+                    <a class="navbar-brand" href="Dashboard.aspx" style="font-size: 28px; font-family: 'Segoe UI'"><i class="fa fa-fw fa-dashboard"></i>Dashboard</></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right" style="font-size: 15px">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 18px; font-family: 'Segoe UI'">
+                                <asp:Label ID="lblComplaints" runat="server" Text="Complaints"></asp:Label>
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li style="font-size: 14px; font-family: 'Segoe UI'">
+                                    <asp:LinkButton ID="lnkNew" runat="server" CausesValidation="false" PostBackUrl="~/New_complaints.aspx">New Complaint</asp:LinkButton>
+                                </li>
+                                <li style="font-size: 14px; font-family: 'Segoe UI'">
+                                    <asp:LinkButton ID="lnkEdit" runat="server" CausesValidation="false" PostBackUrl="~/Edit_Complaints.aspx">Edit Complaint</asp:LinkButton>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <%--   <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size:18px;font-family:'Segoe UI'"><asp:Label ID="Label1" runat="server" Text="Correspondence"></asp:Label> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li style="font-size:14px;font-family:'Segoe UI'">
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" PostBackUrl="~/MailFormat.aspx" >Mails</asp:LinkButton>
+                            </li>
+                            <li style="font-size:14px;font-family:'Segoe UI'">
+                                <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="false" PostBackUrl="~/Edit_Complaints.aspx">Mail2</asp:LinkButton>
+                            </li>
+                           </ul>
+                    </li >--%>
+                        <li style="font-size: 18px; font-family: 'Segoe UI'">
+                            <asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="false" PostBackUrl="~/PageUnderConstruction.aspx">Correspondence</asp:LinkButton>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 18px; font-family: 'Segoe UI'">
+                                <asp:Label ID="lnkPCC" runat="server" Text="Process Control"></asp:Label>
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li style="font-size: 14px; font-family: 'Segoe UI'">
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="false" PostBackUrl="~/ProcessControlCheck.aspx">Complaints</asp:LinkButton>
+                                </li>
+                                <li style="font-size: 14px; font-family: 'Segoe UI'">
+                                    <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="false" PostBackUrl="~/PageUnderConstruction.aspx">Correspondence</asp:LinkButton>
+                                </li>
+                            </ul>
+                        </li>
+                   <%--     <li style="font-size: 18px; font-family: 'Segoe UI'">
+                            <asp:LinkButton ID="lnkPCC" runat="server" CausesValidation="false" PostBackUrl="~/ProcessControlCheck.aspx">Process Control</asp:LinkButton>
+                        </li>--%>
+                        <li style="font-size: 18px; font-family: 'Segoe UI'">
+                            <asp:LinkButton ID="lnkIssueLog" runat="server" CausesValidation="false" PostBackUrl="~/PageUnderConstruction.aspx">Issue Log</asp:LinkButton>
+                        </li>
+                        <li style="font-size: 18px; font-family: 'Segoe UI'">
+                            <asp:LinkButton ID="lnkReports" runat="server" CausesValidation="false" PostBackUrl="~/Complaints_Report.aspx">Reports</asp:LinkButton>
+                        </li>
+                        <li style="font-size: 18px; font-family: 'Segoe UI'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
+                        <li style="font-size: 18px; font-family: 'Segoe UI'; font-size: 22px; font-weight: 400; color: black">
+                            <a href="#">
+                                <asp:Label ID="lblName" runat="server" Text=""></asp:Label></a>
+                            <%--<ul class="dropdown-menu">--%>
+                            <%--<li style="font-size:14px;font-family:'Segoe UI'">
+                                <asp:LinkButton ID="lnkChangePwd" runat="server" CausesValidation="false" PostBackUrl="~/Change_Password.aspx">Change Password</asp:LinkButton>
+                            </li>
+                            <li style="font-size:14px;font-family:'Segoe UI'">
+                                  <asp:LinkButton ID="lnkLogOut" runat="server" OnClick="lnkLogOut_Click" CausesValidation="false">Logout</asp:LinkButton>
+                            </li>--%>
+
+                            <%--</ul>--%>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+
+            <!-- /.container -->
+        </nav>
+
+        <div class="active">
+        </div>
+
+
+        <!-- Footer -->
+
+        <!-- /.container -->
+
+        <!-- jQuery Version 1.11.0 -->
+        <script src="js/jquery-1.11.0.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Script to Activate the Carousel -->
+        <script>
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            })
+        </script>
+
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+    </form>
+    <div class="well well-sm" style="text-align: center; height: 40px">
+        &nbsp;</div>
+
+</body>
+</html>

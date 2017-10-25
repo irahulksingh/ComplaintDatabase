@@ -1,0 +1,145 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Correpondence.aspx.cs" Inherits="Default2" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+    <style type="text/css">
+        .Calendar .ajax__calendar_container
+        {
+            border: 1px solid #646464;
+            background-color: #33cc99;
+            color: #fff;
+            z-index: 180;
+            width: 160px;
+        }
+        .auto-style2
+        {
+            color: #FF0000;
+            font-weight: bold;
+            font-size: small;
+            font-family: "Segoe UI Semilight";
+        }
+        .auto-style3
+        {
+            font-size: small;
+            font-family: "Segoe UI Semibold";
+            font-weight: bold;
+            color: #FF0000;
+        }
+    </style>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    
+     <!-- Javascript Section -->
+    <script src="js/jquery-1.11.0.js"></script>
+    <!-- Page Content -->
+    <div class="container">
+                  <h3 class="page-header">
+                   <i class="fa fa-fw fa-pencil"></i>New Complaint</h3>
+                        <asp:TextBox ID="txtHiddenNoOfDaysCompLogdOn" runat="server" Visible="False" ></asp:TextBox>
+                        <asp:Label ID="lblMsg" runat="server" CssClass="auto-style3"></asp:Label>
+                        <asp:Label ID="lblMsg1" runat="server" CssClass="auto-style3"></asp:Label>
+         <div class="row">
+            <div class="panel panel-default" style="height:312px;background-color:#E8E9E8">        
+            <div class="col-lg-12">
+                    <div class="panel-heading" >
+                    <div class="col-xs-4" >
+                    <label class="control-label">Date:</label>
+                    <asp:TextBox ID="txtDate" runat="server"  AutoPostBack ="True" CssClass="form-control"  OnTextChanged="txtDate_TextChanged" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtDate" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt" CssClass="auto-style2"></asp:RequiredFieldValidator>
+                </div>  
+                <div class="col-xs-4">
+                    <label class="control-label">Master :</label>
+                    <asp:TextBox ID="txtFileNo" runat="server"   CssClass="form-control"  tabIndex="1" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtFileNo" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt" CssClass="auto-style2"></asp:RequiredFieldValidator>
+            </div>
+                <div class="col-xs-4">
+                    <label class="control-label">Account Number:</label>
+                <asp:TextBox ID="txtAccountNo" runat="server" CssClass="form-control" tabIndex="4" MaxLength="15" ></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtAccountNo" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt" CssClass="auto-style2"></asp:RequiredFieldValidator>
+            </div>
+                <div class="col-xs-4">
+                    <label class="control-label">Customer Name:</label>
+                    <asp:TextBox ID="txtCustName" runat="server"   CssClass="form-control"   tabIndex="5" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtCustName" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt" CssClass="auto-style2"></asp:RequiredFieldValidator>
+           </div>
+                <div class="col-xs-4">
+                    <label class="control-label">Source :<br />
+                    Email:</label>
+                    <asp:DropDownList ID="dbMode" runat="server" CssClass="form-control" tabIndex="6"> </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="dbMode" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt" InitialValue="Select" CssClass="auto-style2"></asp:RequiredFieldValidator>
+             </div>
+                <div class="col-xs-4">
+                    <label class="control-label">Channel:</label>
+                    <asp:DropDownList ID="dbChannel" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="dbChannel_SelectedIndexChanged" tabIndex="7"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="dbChannel" CssClass="auto-style2" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt" InitialValue="Select"></asp:RequiredFieldValidator>
+            </div>
+                <div class="col-xs-4">
+                    <label class="control-label">Complaint Category:</label>
+                    <asp:DropDownList ID="dbCompCat" runat="server" CssClass="form-control" tabIndex="9" ></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="dbCompCat" CssClass="auto-style2" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt" InitialValue="Select"></asp:RequiredFieldValidator>
+          </div>
+                <div class="col-xs-4">
+                     <label class="control-label">Complaint Logged On:</label>
+                    <asp:TextBox ID="txtComplaintLoggedOn" runat="server" AutoPostBack="True" CssClass="form-control" MaxLength="8" OnTextChanged="txtComplaintLoggedOn_TextChanged" TabIndex="8" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtComplaintLoggedOn" CssClass="auto-style2" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt"></asp:RequiredFieldValidator>
+                </div>    
+                    <div class="col-xs-4">
+                         <label class="control-label">Action Outstanding:</label>
+                        <asp:TextBox ID="txtActionStanding" CssClass="form-control" runat="server" Font-Names="Segoe UI Semibold" Font-Size="8pt" MaxLength="200" tabIndex="11" TextMode="MultiLine"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="txtActionStanding" CssClass="auto-style2" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt"></asp:RequiredFieldValidator>
+                </div>
+                <div class="col-xs-4">
+                     <label class="control-label">Complaint Summary:</label>
+                    <asp:TextBox ID="txtComplaintSummary" CssClass="form-control" runat="server" Font-Names="Segoe UI Semibold" Font-Size="8pt" MaxLength="1000" tabIndex="10" TextMode="MultiLine" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtComplaintSummary" CssClass="auto-style2" ErrorMessage="Required Field" Font-Bold="False" Font-Names="Segoe UI Semibold" Font-Size="8pt"></asp:RequiredFieldValidator>
+                 </div>
+                        </div></div>
+                </div>
+               </div>
+                     </div>   
+     <div class="container">
+               
+         <div class="row">
+            <div class="panel panel-default" style="height:70px;background-color:#E8E9E8">        
+            <div class="col-lg-12">
+                    <div class="panel-heading" >
+                     <div class="col-xs-4">
+                        <label class="control-label">RMS Due Date:</label>
+                        <asp:TextBox ID="txtRmsDueDate" runat="server" CssClass="form-control" BackColor="White" MaxLength="9" ReadOnly="True" ></asp:TextBox>
+                </div>
+                   <div class="col-xs-4">
+                        <label class="control-label">Complaint Close Due Date:</label>
+                        <asp:TextBox ID="txtComplaintCloseDueDate" runat="server" CssClass="form-control" BackColor="White" MaxLength="9" ReadOnly="True" ></asp:TextBox>
+                </div>
+                       
+                
+                        </div></div></div></div></div>     
+     
+                     <div class="container">
+               
+         <div class="row">
+            <div class="panel panel-default" style="height:64px;background-color:#E8E9E8">        
+            <div class="col-lg-12">
+                    <div class="panel-heading" >          
+            
+                        <br />
+                        <div>
+                            <asp:Button ID="btnSubmit" class="btn btn-success btn-lg pull-right" runat="server" onclick="btnSubmit_Click" TabIndex="12" Text="Save" />
+</div></div></div></div></div></div>
+   
+      <cc1:CalendarExtender ID="CalendarExtender1" CssClass="Calendar" runat="server" Format="MM-dd-yyyy" PopupPosition="Right"
+                                TargetControlID="txtDate"></cc1:CalendarExtender>
+        <cc1:CalendarExtender ID="CalendarExtender3"  CssClass="Calendar" runat="server" Format="MM-dd-yyyy" PopupPosition="Right"
+                                TargetControlID="txtComplaintLoggedOn" Enabled="True"></cc1:CalendarExtender>
+                   <!-- /.row -->
+            <!-- Portfolio Section -->
+           <!-- /.row -->
+          <!-- Features Section -->
+          <!-- /.row -->
+          
+        <!-- Call to Action Section -->
+        </asp:Content>
+

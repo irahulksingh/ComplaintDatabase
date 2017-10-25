@@ -1,0 +1,317 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Copy (2) of New_complaints.aspx.cs" Inherits="Default2" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <script src="js/jquery-1.11.0.js"></script>
+     <!-- Header Carousel -->
+   
+    <header id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 1</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 2</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+                <div class="carousel-caption">
+                    <h2>Caption 3</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        </a>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    New Complaint</h1>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>&nbsp;</h4>
+                        <p> 
+                            <table cellpadding="5" cellspacing="2" border="0">
+                                                        <tr>
+                            <td colspan="7">&nbsp;</td>
+                        </tr>
+                                                        <tr>
+                            <td colspan="7"><span><i class="fa fa-fw fa-check"></i> New Complaint<br />
+                                <br />
+                                Search - Select ComplaintsSearch ::<br />
+                               (Account No/Customer Name/File No/ iCare No) : </span>
+                                <asp:TextBox ID="txtSearchBox" runat="server" Width="225px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtSearchBox" ErrorMessage="*"></asp:RequiredFieldValidator>
+                                <asp:Button ID="btnSearch" runat="server" onclick="btnSearch_Click" Text="Search" />
+                                <asp:Button ID="btnClearAll" runat="server" CausesValidation="False" onclick="btnClearAll_Click" Text="Clear All" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <asp:Label ID="lblMsg" runat="server" ForeColor="#FF0000"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <asp:GridView ID="grdSearchResult" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" Font-Bold="False" Font-Names="Tahoma" Font-Size="9pt" GridLines="Horizontal" OnRowCommand="grdSearchResult_RowCommand">
+                                    <RowStyle BackColor="White" ForeColor="#333333" HorizontalAlign="Center" VerticalAlign="Middle" />
+                                    <Columns>
+                                        <asp:ButtonField CommandName="Select" HeaderText="SELECT" Text="Select" />
+                                        <asp:BoundField DataField="nDateReceived" HeaderText="Date Received" />
+                                        <asp:BoundField DataField="nFileNo" HeaderText="File No." />
+                                        <asp:BoundField DataField="nAccountNo" HeaderText="Account No." />
+                                        <asp:BoundField DataField="nCustomerName" HeaderText="Customer Name">
+                                        <ItemStyle Font-Size="Small" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="nMode" HeaderText="Mode" />
+                                        <asp:BoundField DataField="nChannel" HeaderText="Channel" />
+                                        <asp:BoundField DataField="nComplaintLoggedDate" HeaderText="Complaint Logged Date" />
+                                        <asp:BoundField DataField="nRMSdueDate" HeaderText="RMS Due Date" />
+                                        <asp:BoundField DataField="niCareDate" HeaderText="iCare Date" />
+                                        <asp:BoundField DataField="niCareNo" HeaderText="iCare No." />
+                                        <asp:BoundField DataField="nComplaintCategory" HeaderText="Complaint Category" />
+                                        <asp:BoundField DataField="nComplaintClosedDueDate" HeaderText="Complaint Close Due Date" />
+                                        <asp:BoundField DataField="nDateMTodayAging" HeaderText="Aging" />
+                                        <asp:BoundField DataField="nComplaintClosed" HeaderText="Complaint Closed" />
+                                        <asp:BoundField DataField="nActionStanding" HeaderText="Action Outstansing">
+                                        <ItemStyle Font-Size="XX-Small" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="nComplaintSummary" HeaderText="Complaint Summary" InsertVisible="False">
+                                        <ItemStyle Font-Size="XX-Small" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="nRmsResolution" HeaderText="RMS Resolution">
+                                        <ItemStyle Font-Size="XX-Small" />
+                                        </asp:BoundField>
+                                    </Columns>
+                                    <FooterStyle BackColor="White" ForeColor="#333333" />
+                                    <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
+                                    <SelectedRowStyle BackColor="#339966" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
+                                </asp:GridView>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"><span>Edit - Complaintss</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span>Date Compliant Received :</span></td>
+                            <td>
+                                <asp:TextBox ID="txtDate" runat="server" AutoPostBack="True" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>File N<span>umber :</span></td>
+                            <td>
+                                <asp:TextBox ID="txtFileNo" runat="server" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Account Number :</td>
+                            <td>
+                                <asp:TextBox ID="txtAccountNo" runat="server" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                            <td><span>Customer Name:</span></td>
+                            <td>
+                                <asp:TextBox ID="txtCustName" runat="server" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Mode of Communication :</td>
+                            <td>
+                                <asp:TextBox ID="txtModeOfComm" runat="server" AutoPostBack="True" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                            <td>Channel</td>
+                            <td>
+                                <asp:TextBox ID="txtChannel" runat="server" AutoPostBack="True" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span>Complaint Logged On:</span></td>
+                            <td>
+                                <asp:TextBox ID="txtComplaintLoggedOn" runat="server" AutoPostBack="True" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                            <td>RMS Due Date:</td>
+                            <td>
+                                <asp:TextBox ID="txtRmsDueDate" runat="server" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtHiddenNoOfDaysCompLogdOn" runat="server" Visible="False"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <asp:Label ID="lblMsg1" runat="server" ForeColor="#FF0000"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>iCare Number:</td>
+                            <td>
+                                <asp:TextBox ID="txtiCareNo" runat="server" AutoPostBack="True" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                            <td rowspan="1">Aging:</td>
+                            <td rowspan="1">
+                                <asp:TextBox ID="txtAging" runat="server" Font-Bold="True" Font-Names="Segoe UI Semibold" Font-Size="10pt" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>iCare Date:</td>
+                            <td>
+                                <asp:TextBox ID="txtiCaredate" runat="server" AutoPostBack="True" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                            <td>Complaint Close Due Date:</td>
+                            <td>
+                                <asp:TextBox ID="txtComplaintCloseDueDate" runat="server" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Complaint Category:</td>
+                            <td>
+                                <asp:TextBox ID="txtComplaintCategory" runat="server" AutoPostBack="True" ReadOnly="True" Width="150px"></asp:TextBox>
+                            </td>
+                            <td></td>
+                            <td>Complaint Closed :</td>
+                            <td>
+                                <asp:CheckBox ID="chkYes" runat="server" AutoPostBack="True" Text="Yes" />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2"></td>
+                            <td colspan="1">Reopen Complaint:</td>
+                            <td colspan="2">
+                                <asp:CheckBox ID="chkReopen" runat="server" AutoPostBack="True" OnCheckedChanged="chkReopen_CheckedChanged" Text="Re-Open" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Complaint Summary (Old):</td>
+                            <td colspan="2">
+                                <asp:TextBox ID="txtComplaintSummary" runat="server" Font-Names="Segoe UI Semibold" Font-Size="8pt" Height="50px" MaxLength="1000" ReadOnly="True" TextMode="MultiLine" Width="300px"></asp:TextBox>
+                            </td>
+                            <td colspan="1">Complaint Summary (New):</td>
+                            <td colspan="2">
+                                <asp:TextBox ID="txtComplaintSummaryNew" runat="server" Font-Names="Segoe UI Semibold" Font-Size="8pt" Height="50px" MaxLength="1000" TextMode="MultiLine" Width="300px"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Action Outstanding:</td>
+                            <td colspan="2">
+                                <asp:TextBox ID="txtActionStanding" runat="server" Font-Names="Segoe UI Semibold" Font-Size="8pt" Height="50px" MaxLength="200" ReadOnly="True" TextMode="MultiLine" Width="300px"></asp:TextBox>
+                            </td>
+                            <td colspan="1">RMS Resolution :</td>
+                            <td colspan="1">
+                                <asp:TextBox ID="txtRMSresolution" runat="server" Font-Names="Segoe UI Semibold" Font-Size="8pt" Height="50px" MaxLength="1000" ReadOnly="True" TextMode="MultiLine" Width="300px"></asp:TextBox>
+                            </td>
+                            <td colspan="1"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <asp:Button ID="btnSubmit" runat="server" onclick="btnSubmit_Click" Text="Submit" />
+                            </td>
+                        </tr>
+                            </table>
+                           
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Section -->
+       
+        <!-- /.row -->
+
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-12">
+            </div>
+            <div class="col-md-6">
+                &nbsp;</div>
+        </div>
+        <!-- /.row -->
+       
+
+        <hr>
+        <script src="js/jquery-1.11.0.js"></script>
+        
+        <!-- Call to Action Section -->
+        <div>
+        </div>
+        <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Format="MM-dd-yyyy" PopupPosition="Right"
+                                TargetControlID="txtDate"></cc1:CalendarExtender>
+        <cc1:CalendarExtender ID="CalendarExtender2" runat="server" Format="MM-dd-yyyy"
+                                PopupPosition="Right" TargetControlID="txtiCaredate"></cc1:CalendarExtender>
+        <cc1:CalendarExtender ID="CalendarExtender3" runat="server" Format="MM-dd-yyyy" PopupPosition="Right"
+                                TargetControlID="txtComplaintLoggedOn" Enabled="True"></cc1:CalendarExtender>
+        <cc1:CalendarExtender ID="CalendarExtender4"  runat="server" Format="MM-dd-yyyy"
+                                PopupPosition="Right" TargetControlID="txtiCaredate"></cc1:CalendarExtender>
+         
+
+        
+    </asp:Content>
+

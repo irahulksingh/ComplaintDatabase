@@ -1,0 +1,102 @@
+ protected void UploadButton_Click(object sender, EventArgs e)
+    {
+
+        if (txtiCareNo.Text == "")
+        {
+            lblStatus.Text = "Please enter the iCare Number ; File NOT uploaded";
+        }
+        else
+        {
+            string stPathtoCreate = "~/Uploads/" + txtiCareNo.Text + "-" + txtAccountNo.Text;
+
+            if (!Directory.Exists(stPathtoCreate))
+            {
+                Directory.CreateDirectory(Server.MapPath(stPathtoCreate));
+                if (fUpload.HasFile)
+                {
+                    try
+                    {
+                       if (fUpload.FileName != "")
+                        {
+                            if (fUpload.PostedFile.ContentLength < 10000000)
+                            {
+                                string filename = Path.GetFileName(fUpload.FileName);
+                                fUpload.PostedFile.SaveAs(Server.MapPath(stPathtoCreate) + "/" + filename);
+                                lblStatus.Text = "Upload status: File uploaded!";
+                            }
+                            else
+                                lblStatus.Text = "Upload status: The file has to be less than 10 MB!";
+                        }
+                        else
+                            lblStatus.Text = "Upload status: Only JPEG files are accepted!";
+                    }
+                    catch (Exception ex)
+                    {
+                        lblStatus.Text = "Upload status: The file could not be uploaded. The following error occured:" + ex.Message;
+                    }
+                }
+            }
+            else
+            {
+                lblStatus.Text = "Folder of this iCare No already exists. Please Check";
+            }
+
+            mtdFillingGridviewWithFilesInFolder();
+        }
+    }
+ 
+
+    public void mtdFillingGridviewWithFilesInFolder()
+    {
+        DataTable dtFileInfo = new DataTable();
+        dtFileInfo.Columns.Add("File/s Uploaded", typeof(string));
+        dtFileInfo.Columns.Add("Delete", typeof(string));
+
+
+        foreach (string strFile in Directory.GetFiles(Server.MapPath("~/Uploads/" + txtiCareNo.Text + "-" + txtAccountNo.Text)))
+        {
+            FileInfo fi = new FileInfo(strFile);
+
+            dtFileInfo.Rows.Add(fi.Name, "Delete");
+
+        }
+
+        grdUploaded.DataSource = dtFileInfo;
+        grdUploaded.DataBind();
+
+    }
+
+    protected void grdUploaded_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Download")
+        {
+            Response.Clear();
+            Response.ContentType = "application/octect-stream";
+            Response.AppendHeader("Content-disposition", "filename=" + e.CommandArgument);
+            Response.TransmitFile("~/Uploads/" + txtiCareNo.Text + "-" + txtAccountNo.Text + "/" + e.CommandArgument);
+            Response.End();
+
+        }
+
+        if (e.CommandName == "Delete")
+        {
+           //string stFileName= ((HyperLink)grdUploaded.rows[e
+           // System.IO.File.Delete("~/Uploads/" + txtiCareNo.Text + "-" + txtAccountNo.Text + "/"+);
+         
+        }
+
+    }
+
+
+    #endregion
+   
+    protected void grdUploaded_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        e.Cancel = true;
+        string stFileName = ((HyperLink)grdUploaded.Rows[e.RowIndex].FindControl("FileLink")).Text;
+
+        stFileName = Path.Combine(Server.MapPath("~/Uploads/" + txtiCareNo.Text + "-" + txtAccountNo.Text + "/"), stFileName);
+        File.Delete(stFileName);
+        grdUploaded.DataBind();
+
+        }
